@@ -26,6 +26,10 @@ export class ErrorToastrService {
       localStorage.removeItem('token');
       this.router.navigate(['/login']);
     }
-    this.toastr.error(err.error.error);
+    if (err.error.message != "") {
+      this.toastr.error(err.error.message);
+    } else {
+      this.toastr.error(err.error.error);
+    }
   }
 }

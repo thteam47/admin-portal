@@ -1,5 +1,6 @@
 export interface Mfas {
     type: string;
     enabled: boolean;
-    publicData: string;
+    public_data: string;
+    user_id: string;
 }

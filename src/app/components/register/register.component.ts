@@ -18,34 +18,31 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   hide = true;
   loading = false;
-  constructor(private fb: FormBuilder, private sibling: SiblingService, private _snackBar: MatSnackBar, private router: Router, private toastr: ToastrService, private userService: UserService) {
+  token: string = ""
+  constructor(private fb: FormBuilder, private sibling: SiblingService, private route: ActivatedRoute, private _snackBar: MatSnackBar, private router: Router, private toastr: ToastrService, private userService: UserService) {
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      fullname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      fullName: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)]],
     })
   }
 
   ngOnInit(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    const token = this.route.snapshot.paramMap.get('token') || "";
+    this.token = token
   }
 
-  login() {
-    const user = <User>{
-      username: this.form.value.username,
-      full_name: this.form.value.fullname,
-      email: this.form.value.email,
-    }
-    this.userService.register(user).subscribe((res: any) => {
+  createacc() {
+    const fullName = this.form.value.fullName
+    const username = this.form.value.username
+    const password = this.form.value.password
+    this.userService.register(this.token, fullName, username, password).subscribe((res: any) => {
       console.log("res", res);
-      if (res.ok) {
-        this._snackBar.open(res.message, 'Again', {
-          duration: 7000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-        });
-        this.form.reset();
+      if (res.error_code === 0) {
+        localStorage.setItem('token', res.token)
+        this.router.navigate(['dashboard']);
       } else {
         this.error(res.message);
         this.form.reset();
@@ -57,7 +54,10 @@ export class RegisterComponent implements OnInit {
       }
     )
   }
-
+  hidePassword(event: Event) {
+    event.preventDefault();
+    this.hide = !this.hide;
+  }
   error(message: string) {
     this._snackBar.open(message, 'Again', {
       duration: 3000,

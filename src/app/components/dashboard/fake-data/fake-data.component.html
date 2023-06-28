@@ -1,0 +1,30 @@
+<div style="display: flex; justify-content: center;">
+    <div style="width: 400px;margin-top: 20px;">
+        <mat-form-field>
+            <mat-label>Tenant</mat-label>
+            <mat-select [(value)]="selectedTenantId" (selectionChange)="onSelectChange($event)">
+                <mat-option *ngFor="let item of tenants" [value]="item.tenant_id">
+                    Tenant {{ item.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+
+<mat-toolbar>
+    <div class="demo-button-2">
+        <button mat-raised-button class="demo-button" (click)="processDataSurveyOnePart()">
+            Process Data Survey One Part
+        </button>
+        <button mat-raised-button class="demo-button" (click)="processDataSurveyTwoPart()">
+            Process Data Survey Two Part
+        </button>
+        <button mat-raised-button class="demo-button" (click)="processDataTotal()">
+            Process Data Total
+        </button>
+        <button mat-raised-button class="demo-button" (click)="processDataSumilor()">
+            Process Data Sumilor
+        </button>
+    </div>
+</mat-toolbar>

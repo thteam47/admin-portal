@@ -1,20 +1,38 @@
 [
     {
-        "nameMenu": "Dashboard",
+        "nameMenu": "Tenant",
         "redirect": "/dashboard",
         "icon": "dashboard",
         "show": true
     },
     {
-        "nameMenu": "Detail Status",
-        "redirect": "/dashboard/detailstatus",
-        "icon": "details",
+        "nameMenu": "Combined",
+        "redirect": "/dashboard/combined",
+        "icon": "sync_alt",
         "show": true
     },
     {
         "nameMenu": "User",
         "redirect": "/dashboard/user",
         "icon": "supervisor_account",
+        "show": true
+    },
+    {
+        "nameMenu": "Survey",
+        "redirect": "/dashboard/survey",
+        "icon": "question_answer",
+        "show": true
+    },
+    {
+        "nameMenu": "Category",
+        "redirect": "/dashboard/category",
+        "icon": "category",
+        "show": true
+    },
+    {
+        "nameMenu": "Fake Data",
+        "redirect": "/dashboard/fake-data",
+        "icon": "category",
         "show": true
     }
 ]

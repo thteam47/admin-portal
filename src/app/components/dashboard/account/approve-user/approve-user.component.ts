@@ -18,8 +18,8 @@ export class ApproveUserComponent implements OnInit {
   ngOnInit(): void {
   }
   complete() {
-    this.userService.approveUser(this.data.userId, "approved").subscribe((res: any) => {
-      console.log(this.data.userId)
+    this.userService.approveUser(this.data.user_id, "approved").subscribe((res: any) => {
+      console.log(this.data.user_id)
       console.log(res)
       if (res) {
         this.dialogRef.close();

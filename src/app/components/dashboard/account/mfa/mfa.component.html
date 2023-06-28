@@ -5,7 +5,7 @@
       <tr>
         <td><h4>Type</h4></td>
         <td>
-          <mat-radio-group aria-label="Select an option" [(ngModel)] = "typeMfa" [ngModelOptions]="{standalone: true}">
+          <mat-radio-group aria-label="Select an option" [(ngModel)] = "data.type"  [ngModelOptions]="{standalone: true}">
             <mat-radio-button value="EmailOtp">Gmail</mat-radio-button>
             <mat-radio-button value="Totp">Google Authentication</mat-radio-button>
           </mat-radio-group>
@@ -19,8 +19,8 @@
             <input
               matInput
               placeholder="admin@gmail.com"
-              formControlName="publicData"
-              [(ngModel)]="data.email"
+              formControlName="public_data"
+              [(ngModel)]="data.public_data"
             />
           </mat-form-field>
         </td>

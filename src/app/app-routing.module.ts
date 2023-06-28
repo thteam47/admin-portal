@@ -6,12 +6,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { UpdateForgotPasswordComponent } from './components/update-forgot-password/update-forgot-password.component';
+import { RequestVerifyEmailComponent } from './components/request-verify-email/request-verify-email.component';
 
 const routes: Routes = [
 
   { path: '', redirectTo: 'login',pathMatch: 'full' },
   { path: 'login',component: LoginComponent },
-  { path: 'register',component: RegisterComponent },
+  { path: 'register/:token',component: RegisterComponent },
+  { path: 'request-verify-email',component: RequestVerifyEmailComponent },
   { path: 'verify-account/:token',component: VerifyAccountComponent },
   { path: 'forgot-password',component: ForgotPasswordComponent },
   { path: 'update-password/:token',component: UpdateForgotPasswordComponent },

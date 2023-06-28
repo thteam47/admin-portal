@@ -31,6 +31,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { UpdateForgotPasswordComponent } from './components/update-forgot-password/update-forgot-password.component';
+import { TenantComponent } from './components/dashboard/tenant/tenant.component';
+import { RequestVerifyEmailComponent } from './components/request-verify-email/request-verify-email.component';
 
 
 @NgModule({
@@ -43,6 +45,7 @@ import { UpdateForgotPasswordComponent } from './components/update-forgot-passwo
     VerifyAccountComponent,
     ForgotPasswordComponent,
     UpdateForgotPasswordComponent,
+    RequestVerifyEmailComponent,
   ],
   imports: [
     BrowserModule,

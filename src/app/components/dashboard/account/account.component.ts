@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { ErrorToastrService } from 'src/app/services/error-toastr.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RoleComponent } from './role/role.component';
+import { MfaComponent } from './mfa/mfa.component';
+import { Mfas } from 'src/app/interface/mfas';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +19,7 @@ export class AccountComponent implements OnInit {
 
   user: User = <User>{};
   constructor(public dialog: MatDialog,private userService: UserService, public dialogRef: MatDialogRef<AccountComponent>, private toastr: ToastrService, private errToastr: ErrorToastrService) { }
-
+  mfa: Mfas = <Mfas>{};
   ngOnInit(): void {
     this.getInfo();
   }
@@ -25,16 +27,28 @@ export class AccountComponent implements OnInit {
     this.dialogRef.close();
   }
   getInfo() {
-    this.userService.getUser().subscribe((res: any) => {
-      this.user = <User>{
-        idUser: res.idUser,
-        fullName: res.fullName,
-        username:res.username,
-        email: res.email,
-        role: res.role,
-        password: res.password,
-        action: res.action,
+    this.userService.getUserInfo().subscribe((res: any) => {
+      console.log(res);
+      this.user = res.data
+      this.getMfa()
+      console.log(this.mfa);
+      
+    },
+      (err: any) => {
+        this.errToastr.errToastr(err);
       }
+    )
+  }
+  isEmptyObject(obj: any) {
+    return (obj && (Object.keys(obj).length === 0));
+  }
+  getMfa() {
+    this.userService.getUserMfa(this.user.user_id).subscribe((res: any) => {
+      console.log(res);
+      if (res.mfas.length > 0) {
+        this.mfa = res.mfas[0]
+      }
+      
     },
       (err: any) => {
         this.errToastr.errToastr(err);
@@ -53,7 +67,17 @@ export class AccountComponent implements OnInit {
   editUser(){
     const dialogRef = this.dialog.open(ChangeinfouserComponent, {
       width: '500px',
-      data: { idUser: "null", fullName:this.user.fullName,username:this.user.username,email:this.user.email }
+      data: { idUser: "null", full_name:this.user.full_name,username:this.user.username,email:this.user.email }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getInfo();
+    });
+  }
+
+  updateMfa(){
+    const dialogRef = this.dialog.open(MfaComponent, {
+      width: '500px',
+      data: { user_id: this.user.user_id, public_data:this.mfa.public_data, type:this.mfa.type }
     });
     dialogRef.afterClosed().subscribe(() => {
       this.getInfo();

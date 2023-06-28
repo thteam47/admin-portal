@@ -1,0 +1,39 @@
+<form class="formclass" [formGroup]="form">
+  <h1 mat-dialog-title>Add Tenant</h1>
+  <table class="table">
+    <tr>
+      <td class="left"><h4>Name</h4></td>
+      <td class="right">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Store A"
+            formControlName="name"
+          />
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td class="left"><h4>Domain</h4></td>
+      <td class="right">
+        <mat-form-field appearance="fill">
+          <mat-label>Domain</mat-label>
+          <input matInput placeholder="test.com" formControlName="domain" />
+        </mat-form-field>
+      </td>
+    </tr>
+    
+  </table>
+  <div mat-dialog-content class="action">
+    <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+    <button
+      (click)="complete()"
+      mat-button
+      [disabled]="form.invalid"
+      cdkFocusInitial
+    >
+      Submit
+    </button>
+  </div>
+</form>

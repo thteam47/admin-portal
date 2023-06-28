@@ -1,0 +1,59 @@
+<form class="formclass" [formGroup]="form">
+  <h1 mat-dialog-title>Add Combined</h1>
+  <table class="table">
+    <tr>
+      <td class="left"><h4>Combined Tenant</h4></td>
+      <td class="right">
+        <mat-form-field appearance="fill">
+          <mat-label>Combined Tenant</mat-label>
+          <input
+            matInput
+            placeholder="test.com"
+            formControlName="tenant_id_2"
+          />
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td class="left"><h4>Number Item 1</h4></td>
+      <td class="right">
+        <mat-form-field appearance="fill">
+          <mat-label>Number Item 1</mat-label>
+          <input matInput placeholder="4" formControlName="number_item_1" />
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="left"><h4>Number Item 2</h4></td>
+      <td class="right">
+        <mat-form-field appearance="fill">
+          <mat-label>Number Item 2</mat-label>
+          <input matInput placeholder="5" formControlName="number_item_2" />
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="left"><h4>Number User</h4></td>
+      <td class="right">
+        <mat-form-field appearance="fill">
+          <mat-label>Number User</mat-label>
+          <input matInput placeholder="10" formControlName="number_user" />
+        </mat-form-field>
+      </td>
+    </tr>
+    
+  </table>
+  <div mat-dialog-content class="action">
+    <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+    <button
+      (click)="complete()"
+      mat-button
+      [disabled]="form.invalid"
+      cdkFocusInitial
+    >
+      Submit
+    </button>
+  </div>
+</form>

@@ -1,0 +1,54 @@
+<form class="formclass" [formGroup]="form">
+    <h1 mat-dialog-title>Fake Data</h1>
+    <table class="table">
+      <tr>
+        <td class="left"><h4>Number user</h4></td>
+        <td class="right">
+          <mat-form-field appearance="fill">
+            <mat-label>Number user</mat-label>
+            <input
+              matInput
+              placeholder="20"
+              formControlName="number_user"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td class="left"><h4>Password</h4></td>
+        <td class="right">
+          <mat-form-field appearance="fill">
+            <mat-label>New Password</mat-label>
+            <input
+              placeholder="123456"
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              autocomplete="off"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <div mat-dialog-content class="action">
+      <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+      <button
+        (click)="complete()"
+        mat-button
+        [disabled]="form.invalid"
+        cdkFocusInitial
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+  

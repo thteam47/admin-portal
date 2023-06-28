@@ -5,4 +5,5 @@ export interface AuthenInfo {
     otp: number;
     request_id: string;
     type_mfa: string;
+    user_type: string;
 }

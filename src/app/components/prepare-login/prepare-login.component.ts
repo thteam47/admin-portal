@@ -49,10 +49,11 @@ export class PrepareLoginComponent implements OnInit {
       }
       this.userService.loginAdmin(authenInfo).subscribe((res: any) => {
         console.log("res", res);
-        if (res.errorCode === 0) {
+        if (res.error_code === 0) {
           localStorage.setItem('token', res.token)
           this.fakeLoading();
           this.toastr.success('Login Succesfull');
+          this.router.navigate(['dashboard']);
         } else {
           this.error(res.message);
           // this.form.reset();

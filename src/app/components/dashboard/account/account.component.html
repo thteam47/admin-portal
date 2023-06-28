@@ -1,5 +1,5 @@
 <div class="container cl">
-    <span class="close" (click)="closeDiaLog()">×</span>
+  <span class="close" (click)="closeDiaLog()">×</span>
 </div>
 <div class="title">
   <h2>Account Admin</h2>
@@ -10,7 +10,7 @@
       <mat-card class="conte">
         <mat-grid-list cols="2" rowHeight="40px">
           <mat-grid-tile [colspan]="1" [rowspan]="1" class="text-capitalize">
-            Full Name: {{ user.fullName }}
+            Full Name: {{ user.full_name }}
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="5">
             <img src="./assets/img/man.png" width="70%" />
@@ -25,16 +25,13 @@
             Role: {{ user.role }}
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            Action: 
-            <button
-            mat-icon-button
-            matTooltip="Click to View"
-            class="iconbutton"
-            color="accent"
-            (click)="viewRole()"
-          >
-            <mat-icon aria-label="View">visibility</mat-icon>
-          </button>
+            Action:
+            <button mat-icon-button matTooltip="Click to View" class="iconbutton" color="accent" (click)="viewRole()">
+              <mat-icon aria-label="View">visibility</mat-icon>
+            </button>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1" class="text-capitalize" *ngIf="!isEmptyObject(mfa)">
+            Mfa: {{mfa.type}}
           </mat-grid-tile>
         </mat-grid-list>
       </mat-card>
@@ -44,6 +41,7 @@
     <div class="cod-12">
       <button mat-stroked-button (click)="changePass()">Change Password</button>
       <button mat-stroked-button (click)="editUser()" color="primary">Edit Account</button>
+      <button mat-stroked-button (click)="updateMfa()" color="primary">Update Mfa</button>
     </div>
   </div>
 </div>

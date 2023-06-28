@@ -1,0 +1,107 @@
+<section>
+    <div class="text-center">
+        <h1>Edit Survey</h1>
+    </div>
+
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-6">
+                <mat-card >
+                    <div class="row">
+                        <div class="col-12 mt-4">
+                            <form formArrayName="pages">
+                                <ng-container *ngFor="let page of pages.controls;let i = index"  [formGroupName]="i">
+                                        <h2>Page {{i + 1}}</h2>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Name</mat-label>
+                                            <input
+                                              matInput
+                                              placeholder="Name"
+                                              formControlName="name"
+                                              autocomplete="off"
+                                            />
+                                          </mat-form-field>
+                                          <ng-container formArrayName="elements">
+
+                                        <mat-card *ngFor="let element of getElements(i).controls;let j=index" [formGroupName]="j" [ngStyle]="{'backgroundColor': '#f7f7f7'}" class="my-4 mb-4"  >
+                                                <div>
+                                                    <mat-form-field appearance="fill">
+                                                        <mat-label>Type</mat-label>
+                                                        <mat-select formControlName="type">
+                                                          <mat-option *ngFor="let type of types" [value]="type.value">
+                                                              {{ type.text }}
+                                                          </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div> 
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Title</mat-label>
+                                                    <input
+                                                      matInput
+                                                      placeholder="Title"
+                                                      formControlName="title"
+                                                      autocomplete="off"
+                                                    />
+                                                  </mat-form-field>
+                                                <ng-container *ngIf="getElements(i).controls[j].value.type === 'radiogroup'">
+                                                    <div  formArrayName="choices">
+                                                        <div class="d-flex" *ngFor="let choice of getChoices(i, j).controls; let l=index">
+                                                            <mat-radio-button  aria-readonly="true"></mat-radio-button>
+                                                            <mat-form-field>
+                                                                <input
+                                                                class="emp_id"
+                                                                [formControlName]="l"
+                                                                    matInput
+                                                                    autocomplete="off"
+                                                                />
+                                                            </mat-form-field>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                
+                                                </ng-container>
+                                        </mat-card>    
+                                    </ng-container>
+
+                                </ng-container>
+                            </form>
+                        
+                        </div>
+        
+                        <div class="col-12">
+                            <div class="demo-button">
+                                <button
+                                  mat-raised-button
+                                  [routerLink]="['/dashboard/survey']"
+                                  routerLinkActive="router-link-active"
+                                  class="demo-button"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                mat-raised-button
+                                (click)="preview()"
+                                class="demo-button"
+                              >
+                                Preview
+                              </button>
+                                <button
+                                  mat-raised-button
+                                  (click)="addNew()"
+                                  class="demo-button"
+                                  [disabled]="form.invalid"
+                                >
+                                  Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-6" *ngIf="data">
+                <survey [model]="data"></survey>
+            </div>
+        </div>
+        
+    </form>
+</section>

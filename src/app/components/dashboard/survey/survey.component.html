@@ -1,0 +1,47 @@
+<div style="display: flex; justify-content: center;">
+  <div style="width: 400px;margin-top: 20px;">
+    <mat-form-field>
+      <mat-label>Tenant</mat-label>
+      <mat-select [(value)]="selectedTenantId" (selectionChange)="onSelectChange($event)">
+        <mat-option *ngFor="let item of tenants" [value]="item.tenant_id">
+          Tenant {{ item.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<mat-toolbar>
+  <div class="search">
+
+  </div>
+  <span class="example-spacer"></span>
+
+  <div class="demo-button">
+      <button mat-raised-button class="demo-button" (click)="addSurvey()">
+          Add data
+      </button>
+      <button mat-raised-button class="demo-button" (click)="fakeData()">
+          Fake data
+        </button>
+  </div>
+</mat-toolbar>
+<mat-list>
+  <ng-container *ngIf="datas.length > 0; else noSurveys">
+    <div class="survey-for-you">
+      <p>Survey of you</p>
+    </div>
+    <mat-list-item *ngFor="let survey of datas; let i = index">
+      <h4 class="col-2  mat-text-weight-bold mt-8" mat-line>Survey {{i+1}}</h4>
+      <h3 class="col-6" mat-line>{{survey.name}}</h3>
+      <!-- <p mat-line>{{survey.name}}</p> -->
+      <button mat-button color="primary" (click)="selectSurvey(survey)">Edit
+      </button>
+    </mat-list-item>
+  </ng-container>
+</mat-list>
+
+<ng-template #noSurveys>
+  <div class="survey-for-you">
+    <p>There are currently no surveys available</p>
+  </div>
+</ng-template>

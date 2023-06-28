@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('email');
+    localStorage.removeItem('tenantId');
+    localStorage.removeItem('typeUser');
   }
 
   login() {
@@ -38,15 +41,18 @@ export class LoginComponent implements OnInit {
     const authenInfo = <AuthenInfo>{
       type: "UsernamePassword",
       username: this.form.value.username,
-      password: this.form.value.password
+      password: this.form.value.password,
+      user_type: "customer"
     }
+    this.loading = true
     this.userService.loginAdmin(authenInfo).subscribe((res: any) => {
       console.log("res", res);
-      if (res.errorCode === 0) {
+      if (res.error_code === 0) {
         this.userService.prepareLogin(res.token).subscribe((res: any) => {
           console.log("res", res);
           localStorage.setItem('token', res.token)
-          if (res.typeMfa !== "") {
+          localStorage.setItem('email', username)
+          if (res.type_mfa !== "") {
             this.router.navigate(['prepare-login'], {
               state: {
                 message: res.message,
@@ -54,8 +60,8 @@ export class LoginComponent implements OnInit {
               }
             });
             localStorage.setItem('message', res.message)
-            localStorage.setItem('typeMfa', res.typeMfa)
-            localStorage.setItem('requestId', res.requestId)
+            localStorage.setItem('typeMfa', res.type_mfa)
+            localStorage.setItem('requestId', res.request_id)
             localStorage.setItem('token', res.token)
             
           } else {

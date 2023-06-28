@@ -18,8 +18,8 @@ export class ConfimedeleteuserComponent implements OnInit {
   ngOnInit(): void {
   }
   complete() {
-    this.userService.deleteUser(this.data.userId).subscribe((res: any) => {
-      console.log(this.data.userId)
+    this.userService.deleteUser(this.data.user_id).subscribe((res: any) => {
+      console.log(this.data.user_id)
       console.log(res)
       if (res) {
         this.dialogRef.close();

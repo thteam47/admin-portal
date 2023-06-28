@@ -67,7 +67,7 @@ export class ChangeroleComponent implements OnInit {
       permissions: permissionss,
     }
     console.log(dataRole)
-    this.userService.changeRole(dataRole,this.data.userId).subscribe((res: any) => {
+    this.userService.changeRole(dataRole,this.data.user_id).subscribe((res: any) => {
       this.toastr.success('Change Role User Succesfull', 'Done');
       this.dialogRef.close();
     }, (err: any) => {

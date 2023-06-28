@@ -6,16 +6,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DetailstatusComponent } from './detailstatus/detailstatus.component';
+import { TenantComponent } from './tenant/tenant.component';
+import { SurveyComponent } from './survey/survey.component';
+import { CombinedComponent } from './combined/combined.component';
+import { CategoryComponent } from './category/category.component';
+import { FakeDataComponent } from './fake-data/fake-data.component';
 
 const routes: Routes = [
   {
     path: '', component: DashboardComponent, children: [
-      { path: '',component: ContentComponent},
+      { path: '',component: TenantComponent},
       { path: 'account', component: AccountComponent },
       { path: 'newserver', component: NewServerComponent },
       { path: 'user', component: AdminuserComponent },
-      { path: 'detailstatus', component: DetailstatusComponent },
-      { path: 'detailstatus/:id', component: DetailstatusComponent },      
+      { path: 'combined', component: CombinedComponent }, 
+      { path: 'survey', component: SurveyComponent },    
+      { path: 'category', component: CategoryComponent }, 
+      { path: 'fake-data', component: FakeDataComponent }, 
     ]
   },
 ];

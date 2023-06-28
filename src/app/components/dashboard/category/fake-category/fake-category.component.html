@@ -1,0 +1,30 @@
+<form class="formclass" [formGroup]="form">
+    <h1 mat-dialog-title>Fake Data</h1>
+    <table class="table">
+      <tr>
+        <td class="left"><h4>Number category</h4></td>
+        <td class="right">
+          <mat-form-field appearance="fill">
+            <mat-label>Number category</mat-label>
+            <input
+              matInput
+              placeholder="20"
+              formControlName="number_category"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <div mat-dialog-content class="action">
+      <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+      <button
+        (click)="complete()"
+        mat-button
+        [disabled]="form.invalid"
+        cdkFocusInitial
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+  
